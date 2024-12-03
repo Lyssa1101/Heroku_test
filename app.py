@@ -1,13 +1,15 @@
-from flask import Flask
-import os
-
-port = int(os.environ.get("PORT"))     #nano ~/bash.bashrc ????
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hey there what's up world we just deployed something and python is superiorrrr"
+    cats = [
+        {"name": "Whiskers", "img": "images/cat1.jpg", "info": "A playful tabby cat."},
+        {"name": "Snowball", "img": "images/cat2.jpg", "info": "A lovely white cat."},
+        {"name": "Shadow", "img": "images/cat3.jpg", "info": "A mysterious black cat."}
+    ]
+    return render_template("index.html", cats=cats)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True)
